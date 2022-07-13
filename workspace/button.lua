@@ -3,8 +3,8 @@ local Button = {}
 function Button:new(startX, endX, startY, endY, range)
     local object = {
         ["click"] = false,
-        ["x"] = {["Start"] = startX, ["End"] = endX},
-        ["y"] = {["Start"] = startY, ["End"] = endY},
+        ["x"] = {["start"] = startX, ["tip"] = endX},
+        ["y"] = {["start"] = startY, ["tip"] = endY},
         ["range"] = range
     }
 

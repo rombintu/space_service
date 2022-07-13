@@ -1,23 +1,20 @@
 local love = require("love")
+local config = require("../utils.config")
 
 Tablet = {}
 
-local width = 400
-local height = 100
-local speed = 1000
-local delta = 2
-local toX = 300
-
-function Tablet:new(x, y)
+function Tablet:new(x, y, side)
     local object = {
         ["x"] = x,
         ["y"] = y,
-        ["width"] = width,
-        ["height"] = height,
+        ["width"] = config.tablet.width,
+        ["height"] = config.tablet.height,
         ["color"] = {0,1,1}, -- TODO
-        ["speed"] = speed,
-        ["delta"] = delta,
-        ["max"] = width
+        ["speed"] = config.tablet.speed,
+        ["delta"] = config.tablet.delta,
+        ["max"] = config.tablet.width,
+        ["active"] = false,
+        ["side"] = side,
     }
 
     function object:getPos()
@@ -33,9 +30,8 @@ function Tablet:new(x, y)
         love.graphics.rectangle("fill", self.x, self.y, self.width, self.height)
     end
 
-    function object:moveToRight(dt)
-        self.x = self.x + self.speed * dt
-        self.speed = self.speed - self.delta * dt
+    function object:moveTo(dt)
+        self.x = self.x + (self.speed*side) * dt
     end
 
     setmetatable(object, self)
